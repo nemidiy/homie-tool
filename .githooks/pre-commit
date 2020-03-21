@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+
+# If you want to allow non-ASCII filenames set this variable to true.
+exec 1>&2
+
+echo "Running mypy for static checks"
+PYTHONPATH=src mypy --config-file etc/mypy.ini src/
+
+if [ $? -ne 0 ]
+then
+	echo "-> Running mypy static checks failed"
+	exit 1
+fi
+exit 0

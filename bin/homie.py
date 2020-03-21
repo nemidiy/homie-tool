@@ -57,7 +57,6 @@ def list_comm() -> None:
             print("----------------------")
         except Exception as e:
             print(e)
-        return True
     
     b.connect(on_connect, on_message)
     b.loop()
