@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8.2
+    steps:
+      - checkout
+      - run: 
+          name: install pip
+          command: pip install -U pip setuptools wheel
+      - run:
+          name: requirements
+          command: pip install -r etc/requirements.txt
+      - run:
+          name: tests
+          command: pytest 
