@@ -18,7 +18,6 @@ ENV LC_CTYPE en_US.UTF-8
 ENV LC_MESSAGES en_US.UTF-8
 
 COPY etc/requirements.txt .
-
 RUN set -ex \
     && buildDeps=' \
 	git \
@@ -63,4 +62,8 @@ RUN set -ex \
 
 RUN echo 'alias ll="ls -lrtah"' >> ~/.bashrc
 
-CMD ["pytest"] # set default arg for entrypoint
+COPY scripts/entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["test"] # set default arg for entrypoint
