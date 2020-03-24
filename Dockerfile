@@ -28,19 +28,13 @@ RUN set -ex \
 	$buildDeps \
 	freetds-bin \
 	build-essential \
-	default-libmysqlclient-dev \
 	apt-utils \
 	curl \
-	rsync \
 	netcat \
-	libpq5 \
 	locales \
-	gpg \
-	gzip \
-	unzip \
-	gpg-agent \
 	net-tools \
 	vim-tiny \
+	procps \
 	mosquitto \
 	mosquitto-clients \
     && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
@@ -59,6 +53,11 @@ RUN set -ex \
 	/usr/share/man \
 	/usr/share/doc \
 	/usr/share/doc-base
+
+COPY etc/mosquitto /mosquitto
+RUN chmod -R a+w /mosquitto/log
+
+EXPOSE 1883 8883 9883
 
 RUN echo 'alias ll="ls -lrtah"' >> ~/.bashrc
 
