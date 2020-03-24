@@ -12,5 +12,11 @@ jobs:
           name: requirements
           command: pip install -r etc/requirements.txt
       - run:
+          name: static type checks
+          command: mypy --config-file etc/mypy.ini src
+      - run:
+          name: formatting
+          command: black -t py38 --check src/ tests/
+      - run:
           name: tests
-          command: pytest 
+          command: pytest
