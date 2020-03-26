@@ -20,3 +20,6 @@ jobs:
       - run:
           name: tests
           command: pytest
+      - run:
+          name: coverage
+          command: pytest --cov=src tests/
